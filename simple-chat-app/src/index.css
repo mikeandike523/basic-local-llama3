@@ -1,0 +1,83 @@
+/* css-reset.css */
+
+html {
+    /* Defines 1rem */
+    font-size: 16px;
+}
+
+code {
+    font-family: monospace;
+}
+
+/* Box sizing reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin and padding */
+body,
+h1, h2, h3, h4, h5, h6,
+p, blockquote, pre,
+dl, dd, ol, ul,
+figure,
+hr,
+fieldset, legend,
+button, input, textarea,
+th, td {
+  margin: 0;
+  padding: 0;
+}
+
+/* Set default font and smoothing */
+body {
+  line-height: 1.5;
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Remove list styles */
+ul, ol {
+  list-style: none;
+}
+
+/* Remove default link styling */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Make images behave consistently */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Form elements reset */
+button, input, select, textarea {
+  font: inherit;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+/* Table reset */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+}
+
+#root {
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+}
