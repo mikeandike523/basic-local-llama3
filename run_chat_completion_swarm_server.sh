@@ -1,12 +1,17 @@
 #!/bin/bash
 
+
+
 rm -rf ports
 
-source "$HOME/.bashrc"
-source "$CONDA_PROFILE_SCRIPT" && conda activate base
-conda activate llm-flatland-env
-
-CHECKPOINT_DIR="/home/adam-sohnen/.cache/huggingface/hub/models--meta-llama--Llama-3.2-3B-Instruct/snapshots/0cb88a4f764b7a12671c53f0838cd831a0843b95/original"
+conda_base() {
+    eval "$("$HOME/anaconda3/bin/conda" shell.bash hook)"
+}
+conda_base
+conda activate basic-local-llama3-env
+dn="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
+export PYTHONPATH="${PYTHONPATH:+$PYTHONPATH:}$dn"
+CHECKPOINT_DIR="$HOME/models/Llama-3.2-3B-Instruct"
 
 echo ""
 echo "Loading..."
