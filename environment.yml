@@ -1,10 +1,10 @@
-name: basic-local-llama3-env  # Replace with your desired environment name
+name: basic-local-llama3-env
 channels:
   - pytorch
   - defaults
   - conda-forge
 dependencies:
-  - python=3.12  # Optional: specify a Python version
+  - python=3.10
   - pip
   - annotated-types
   - certifi
@@ -22,12 +22,14 @@ dependencies:
   - typing-extensions
   - urllib3
   - pytorch
+  - pytorch-cuda
   - torchvision
   - torchaudio
-  - pytorch-cuda
   - flask
   - fire
   - flask-cors
+  - fairscale
+  - cudatoolkit
   
   - pip:
     

@@ -59,6 +59,7 @@ def init_model(ckpt_dir: str, max_seq_len: int, max_batch_size: int, model_paral
             max_seq_len=max_seq_len,
             max_batch_size=max_batch_size,
             model_parallel_size=model_parallel_size,
+            device="cuda"
         )
         print("Model initialized.")
     return generator
