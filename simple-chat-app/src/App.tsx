@@ -3,9 +3,8 @@ import { ChangeEvent, useRef, useState } from "react";
 import { MdError, MdSend } from "react-icons/md";
 import { Button, Div, H1, H2, I, P, Span, Textarea } from "style-props-html";
 
-const COMPLETION_SERVER_URL = import.meta.env.DEV
-  ? "http://localhost:5000/completion"
-  : "/completion";
+const COMPLETION_SERVER_URL = "http://localhost:5000/completion"
+
 
 const spin = keyframes`
   from {
