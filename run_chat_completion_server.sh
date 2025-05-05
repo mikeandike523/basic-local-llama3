@@ -8,7 +8,6 @@ conda_base
 conda activate basic-local-llama3-env
 dn="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 export PYTHONPATH="${PYTHONPATH:+$PYTHONPATH:}$dn"
-export PYTHONPATH="${PYTHONPATH:+$PYTHONPATH:}$dn/llama-models"
 python chat_completion_server.py
 conda deactivate
 conda deactivate

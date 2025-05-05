@@ -11,7 +11,6 @@ conda_base
 conda activate basic-local-llama3-env
 dn="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 export PYTHONPATH="${PYTHONPATH:+$PYTHONPATH:}$dn"
-export PYTHONPATH="${PYTHONPATH:+$PYTHONPATH:}$dn/llama-models"
 CHECKPOINT_DIR="$HOME/models/Llama-3.2-3B-Instruct/original"
 
 echo ""

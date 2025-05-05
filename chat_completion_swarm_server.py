@@ -24,10 +24,10 @@ from flask_cors import CORS
 
 # Import your model and related classes.
 from llama_models.datatypes import RawMessage
-from llama_models.llama3.reference_impl.generation import Llama
+from llama_models.llama3.generation import Llama
 
 
-MAX_SEQ_LEN=int(8192 * 1.25)
+MAX_SEQ_LEN=8192
 MAX_BATCH_SIZE=1
 
 
@@ -50,7 +50,7 @@ CORS(app)
 
 RESERVED_PORTS=[22, 80, 443, 3000, 5000]
 
-def init_model(ckpt_dir: str, max_seq_len: int, max_batch_size: int, model_parallel_size: int):
+def init_model(ckpt_dir: str, max_seq_len: int, max_batch_size: int):
     """Initialize the Llama model if not already built."""
     global generator
     if generator is None:
@@ -58,7 +58,6 @@ def init_model(ckpt_dir: str, max_seq_len: int, max_batch_size: int, model_paral
             ckpt_dir=ckpt_dir,
             max_seq_len=max_seq_len,
             max_batch_size=max_batch_size,
-            model_parallel_size=model_parallel_size,
             device="cuda"
         )
         print("Model initialized.")
@@ -130,14 +129,13 @@ def completions():
 def serve(ckpt_dir: str,
           max_seq_len: int = MAX_SEQ_LEN,
           max_batch_size: int = MAX_BATCH_SIZE,
-          model_parallel_size: int = 1,
           host: str = "127.0.0.1"):
     """
     Launch a Flask worker server on an available port.
     This function is intended to be launched by torchrun.
     """
     global global_port, port_status_file
-    init_model(ckpt_dir, max_seq_len, max_batch_size, model_parallel_size)
+    init_model(ckpt_dir, max_seq_len, max_batch_size)
     global_port = find_available_port()
     port_status_file = write_port_status(global_port, busy=False)
     print(f"Worker server running on {host}:{global_port} with status file: {port_status_file}")
