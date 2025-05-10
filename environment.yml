@@ -9,7 +9,6 @@ dependencies:
   - pip
   - flask
   - flask-cors
-  # - pip:
-  #   - llama-models[torch]
-    
-    
+  - pip:
+    - llama-models[torch]
+  

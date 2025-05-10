@@ -1,8 +1,9 @@
+import json
 from flask import Flask, request, jsonify
 import os
-import json
 import requests
 from flask_cors import CORS
+import traceback
 
 app = Flask(__name__)
 CORS(app)
@@ -40,11 +41,14 @@ def process():
 
         response_json = response.json()
 
+        print(json.dumps(response_json, indent=2))
+
         print(f"Served by: {response_json["served_by"]}")
 
         return jsonify(response_json["result"])
 
     except Exception as e:
+        traceback.print_exc()
         print("Error forwarding request:", str(e))
         return jsonify("Failed to reach LLM server."), 500
 
