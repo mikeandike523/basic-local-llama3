@@ -189,17 +189,19 @@ def completions():
         max_gen_len = data.get("max_tokens", DEFAULT_MAX_TOKENS)
         messages = data.get("messages", None)
 
-            
-
         request_validation_errors = []
 
         if messages is None:
-            request_validation_errors.append(InvalidRequestError("Missing or null `messages` field."))
+            request_validation_errors.append(
+                InvalidRequestError("Missing or null `messages` field.")
+            )
         else:
             if not isinstance(messages, list):
-                request_validation_errors.append(InvalidRequestError("Messages must be an array."))
+                request_validation_errors.append(
+                    InvalidRequestError("Messages must be an array.")
+                )
             else:
-                ... # todo: rest of validaiton logic for message list
+                ...  # todo: rest of validaiton logic for message list
 
         if not isinstance(temperature, (float, int)):
             request_validation_errors.append(
@@ -216,7 +218,9 @@ def completions():
             )
 
         if not isinstance(top_p, (float, int)):
-            request_validation_errors.append(InvalidRequestError(f"Invalid top_p: {top_p}"))
+            request_validation_errors.append(
+                InvalidRequestError(f"Invalid top_p: {top_p}")
+            )
         else:
             top_p = float(top_p)
 
@@ -252,6 +256,8 @@ def completions():
             temperature=temperature,
             top_p=top_p,
         )
+
+
 
         if result.generation.stop_reason == StopReason.out_of_tokens:
             raise OutOfTokensError(
@@ -300,9 +306,9 @@ OutOfTokensError in swarm server (gpu_id={global_gpu_id}, port={global_port}):
 {str(e)}
 
 """.strip()  # traceback not needed for handled error case
-                + "\n\n"
-            ),
-            "red",
+                + "\n\n",
+                "red",
+            )
         )
         return jsonify(e.to_json()), OutOfTokensError.HTTP_STATUS
     except InvalidResponseError as e:
@@ -316,9 +322,9 @@ InvalidResponseError in swarm server (gpu_id={global_gpu_id}, port={global_port}
 {str(e)}
 
 """.strip()  # traceback not needed for handled error case
-                + "\n\n"
-            ),
-            "red",
+                + "\n\n",
+                "red",
+            )
         )
         return jsonify(e.to_json()), InvalidResponseError.HTTP_STATUS
     except Exception as e:
@@ -336,9 +342,9 @@ Traceback:
 {tb_str}
 
 """.strip()
-                + "\n\n"
+                + "\n\n",
+                "red",
             ),
-            "red",
         )
         write_port_status(global_port, busy=False)
         return jsonify(UnknownServerError(e).to_json()), UnknownServerError.HTTP_STATUS

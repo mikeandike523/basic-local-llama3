@@ -47,6 +47,23 @@ def process():
 
         return jsonify(response_json["result"])
 
+    except requests.HTTPError as http_err:
+        
+        error_response = http_err.response
+
+        # Prepare the response to be sent back
+        flask_response = jsonify(error_response.json()) if error_response.content else ""
+        
+        # Set the status code
+        flask_response.status_code = error_response.status_code
+        
+        # Copy all headers from the original response
+        for header, value in error_response.headers.items():
+            flask_response.headers[header] = value
+
+        return flask_response
+
+
     except Exception as e:
         traceback.print_exc()
         print("Error forwarding request:", str(e))
